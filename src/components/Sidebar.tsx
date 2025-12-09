@@ -71,7 +71,7 @@ export default function Sidebar() {
             localStorage.removeItem("user");
             navigate("/login");
           }}
-          className="flex items-center gap-2 text-white-400 text-lg"
+          className="flex items-center gap-2 text-white-400 text-lg cursor-pointer text-center hover:bg-gray-600 rounded-2xl w-28 h-10"
         >
           🚪 Logout
         </button>

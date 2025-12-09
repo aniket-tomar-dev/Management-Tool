@@ -17,7 +17,13 @@ export default function Register() {
   const navigate = useNavigate();
 
   const onSubmit = (data: any) => {
-    localStorage.setItem("user", JSON.stringify(data));
+    const newUser = {
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+    };
+
+    localStorage.setItem("user", JSON.stringify(newUser));
     navigate("/login");
   };
 
@@ -25,11 +31,11 @@ export default function Register() {
     <div className="h-screen w-screen flex text-white">
       <div
         className="w-1/2 h-full flex flex-col justify-center px-20
-        bg-gradient-to-br from-[#0f766e] via-[#0b3b5b] to-[#020617]"
+        bg-linear-to-br from-[#0f766e] via-[#0b3b5b] to-[#020617]"
       >
         <div className="flex items-center gap-4 mb-6">
           <div
-            className="w-12 h-12 rounded-xl bg-gradient-to-br
+            className="w-12 h-12 rounded-xl bg-linear-to-br
             from-blue-500 to-indigo-600 flex items-center justify-center
             text-xl font-bold"
           >
@@ -61,7 +67,7 @@ export default function Register() {
 
       <div
         className="w-1/2 h-full flex items-center justify-center
-        bg-gradient-to-br from-[#020617] via-[#020617] to-[#0f172a]"
+        bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a]"
       >
         <div
           className="w-full max-w-md bg-[#020617]/70 backdrop-blur
@@ -103,7 +109,7 @@ export default function Register() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-indigo-600"
+              className="w-full bg-linear-to-r from-blue-500 to-indigo-600"
             >
               Create account
             </Button>

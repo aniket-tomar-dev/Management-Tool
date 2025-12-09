@@ -5,7 +5,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { loadProjects, saveProjects } from "../../types/projectStorage";
 
 interface Project {
   id: number;
@@ -37,6 +39,11 @@ export default function Projects() {
 
   const [projects, setProjects] = useState<Project[]>([]);
 
+  useEffect(() => {
+    const saved = loadProjects();
+    setProjects(saved);
+  }, []);
+
   const handleCreateProject = () => {
     if (!projectName.trim()) return alert("Project name required!");
 
@@ -46,13 +53,18 @@ export default function Projects() {
       description,
       color: selectedColor,
     };
+    const updated = [...projects, newProject];
 
-    setProjects([...projects, newProject]);
+    setProjects(updated);
+
+    localStorage.setItem("projects", JSON.stringify(updated));
 
     setProjectName("");
     setDescription("");
     setSelectedColor(colors[0]);
     setOpen(false);
+    setProjects(updated);
+    saveProjects(updated);
   };
 
   return (
@@ -86,31 +98,33 @@ export default function Projects() {
               key={p.id}
               className="bg-[#0f172a] border border-white/10 rounded-xl p-5 text-white shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <div className="flex items-center gap-3  mb-4 ">
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold"
-                  style={{ backgroundColor: p.color }}
-                >
-                  {p.name?.charAt(0).toUpperCase()}
+              <Link to={`/dashboard/projects/${p.id}`} key={p.id}>
+                <div className="flex items-center gap-3  mb-4 ">
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold"
+                    style={{ backgroundColor: p.color }}
+                  >
+                    {p.name?.charAt(0).toUpperCase()}
+                  </div>
+
+                  <div>
+                    <h3 className="text-2xl font-semibold">{p.name}</h3>
+                    <p className="text-sm opacity-70">{0} tasks</p>
+                  </div>
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-semibold">{p.name}</h3>
-                  <p className="text-sm opacity-70">{0} tasks</p>
+                <p className="text-base opacity-75 mb-4">
+                  {p.description || "No description"}
+                </p>
+                <br />
+                <p className="text-sm opacity-70 mb-1">Progress</p>
+                <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-blue-500 rounded-full"
+                    style={{ width: `${0}%` }}
+                  ></div>
                 </div>
-              </div>
-
-              <p className="text-base opacity-75 mb-4">
-                {p.description || "No description"}
-              </p>
-              <br />
-              <p className="text-sm opacity-70 mb-1">Progress</p>
-              <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-blue-500 rounded-full"
-                  style={{ width: `${0}%` }}
-                ></div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

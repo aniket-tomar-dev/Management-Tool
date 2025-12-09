@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Settings from "./pages/dashboardpage/Settings";
 import DashBoardLayout from "./layouts/DashBoardLayout";
 import Projects from "./pages/dashboardpage/Projects";
+import ProjectTask from "./pages/dashboardpage/ProjectTask";
 // import DashBoardLayout from "./layouts/DashBoardLayout";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route index element={<DashBoard />} />
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="projects" element={<Projects />} />
+          <Route path="projects/:id" element={<ProjectTask />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>

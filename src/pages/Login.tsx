@@ -4,6 +4,7 @@ import { loginSchema } from "../features/auth/schema";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import { Link, useNavigate } from "react-router-dom";
+import type { User } from "../types/user";
 
 export default function Login() {
   const {
@@ -17,7 +18,14 @@ export default function Login() {
   const navigate = useNavigate();
 
   const onSubmit = (data: any) => {
-    const savedUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const savedUserString = localStorage.getItem("user");
+
+    if (!savedUserString) {
+      alert("User not registered!");
+      return;
+    }
+
+    const savedUser = JSON.parse(savedUserString) as User;
 
     if (
       savedUser.email === data.email &&
@@ -33,11 +41,11 @@ export default function Login() {
     <div className="h-screen w-screen flex text-white">
       <div
         className="w-1/2 h-full flex flex-col justify-center px-20
-        bg-gradient-to-br from-[#0f766e] via-[#0b3b5b] to-[#020617]"
+        bg-linear-to-br from-[#0f766e] via-[#0b3b5b] to-[#020617]"
       >
         <div className="flex items-center gap-4 mb-6">
           <div
-            className="w-12 h-12 rounded-xl bg-gradient-to-br
+            className="w-12 h-12 rounded-xl bg-linear-to-br
             from-blue-500 to-indigo-600 flex items-center justify-center
             text-xl font-bold"
           >
@@ -69,7 +77,7 @@ export default function Login() {
 
       <div
         className="w-1/2 h-full flex items-center justify-center
-        bg-gradient-to-br from-[#020617] via-[#020617] to-[#0f172a]"
+        bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a]"
       >
         <div
           className="w-full max-w-md bg-[#020617]/80 backdrop-blur
@@ -99,7 +107,7 @@ export default function Login() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-indigo-600"
+              className="w-full bg-linear-to-r from-blue-500 to-indigo-600"
             >
               Login
             </Button>
