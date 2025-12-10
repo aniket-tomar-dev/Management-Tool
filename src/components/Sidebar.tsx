@@ -1,6 +1,11 @@
 import { useNavigate, NavLink } from "react-router-dom";
 
-export default function Sidebar() {
+interface SidebarProps {
+  darkMode: boolean;
+  setDarkMode: (value: boolean) => void;
+}
+
+export default function Sidebar({ darkMode, setDarkMode }: SidebarProps) {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -57,8 +62,11 @@ export default function Sidebar() {
       </div>
 
       <div className="px-5 py-4 border-t border-white/10 space-y-4">
-        <button className="flex items-center gap-2 text-gray-300 text-lg">
-          ☀️ Light mode
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="flex items-center gap-2 text-lg"
+        >
+          {darkMode ? "☀️ Light mode" : "🌙 Dark mode"}
         </button>
 
         <div className="text-sm">

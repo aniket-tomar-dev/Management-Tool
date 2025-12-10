@@ -1,9 +1,9 @@
-export const loadProjects = () => {
+export const loadProjects = (): Project[] => {
   const data = localStorage.getItem("projects");
   return data ? JSON.parse(data) : [];
 };
 
-export const saveProjects = (projects: any[]) => {
+export const saveProjects = (projects: Project[]): void => {
   localStorage.setItem("projects", JSON.stringify(projects));
 };
 

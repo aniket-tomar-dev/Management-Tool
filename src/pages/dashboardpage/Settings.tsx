@@ -1,5 +1,16 @@
+import { useEffect, useState } from "react";
+
 export default function Settings() {
   const user = JSON.parse(localStorage.getItem("user") || "");
+
+  const [fullName, setFullName] = useState(user.fullName || "");
+  const [email, setEmail] = useState(user.email || "");
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    setFullName(user.fullName || "");
+    setEmail(user.email || "");
+  }, []);
 
   return (
     <div className="h-full w-full p-6 text-white">
@@ -20,16 +31,23 @@ export default function Settings() {
           <div className="space-y-4">
             <input
               className="w-full bg-[#0f172a] p-3 rounded-lg"
-              value={user.fullName || ""}
-              disabled
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
             <input
               className="w-full bg-[#0f172a] p-3 rounded-lg"
-              value={user.email || ""}
-              disabled
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-lg transition">
-              💾Save Changes
+            <button
+              className="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-lg transition"
+              onClick={() => {
+                const updatedUser = { ...user, fullName, email };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                alert("Changes saved!");
+              }}
+            >
+              💾 Save Changes
             </button>
           </div>
         </div>
@@ -64,13 +82,13 @@ export default function Settings() {
             <span className="text-lg font-bold">Account ID :</span>{" "}
             <span className="text-white">174e0dc3...</span>
           </p>
-          <hr className="mt-2 border-gray-400 border-t-1" />
+          <hr className="mt-2 border-gray-400 border-t" />
           <br />
           <p className="text-gray-400 flex justify-between ">
             <span className="text-lg font-bold">Member since :</span>{" "}
             <span className="text-white">December 7, 2025</span>
           </p>
-          <hr className="mt-3 border-gray-400 border-t-1" />
+          <hr className="mt-3 border-gray-400 border-t" />
         </div>
       </div>
     </div>
