@@ -7,23 +7,12 @@ import Settings from "./pages/dashboardpage/Settings";
 import DashBoardLayout from "./layouts/DashBoardLayout";
 import Projects from "./pages/dashboardpage/Projects";
 import ProjectTask from "./pages/dashboardpage/ProjectTask";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(
-    localStorage.getItem("theme") === "dark"
-  );
-
   useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
+    document.documentElement.classList.add("dark");
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
@@ -33,7 +22,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <DashBoardLayout darkMode={darkMode} setDarkMode={setDarkMode} />
+              <DashBoardLayout />
             </ProtectedRoute>
           }
         >

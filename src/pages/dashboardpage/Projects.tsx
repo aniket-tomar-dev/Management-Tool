@@ -37,6 +37,8 @@ export default function Projects() {
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -66,6 +68,11 @@ export default function Projects() {
     setProjects(updated);
     saveProjects(updated);
   };
+  const filteredProjects = projects.filter(
+    (p) =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="p-6 w-full">
@@ -86,14 +93,16 @@ export default function Projects() {
       <div className="mb-6">
         <input
           type="text"
-          placeholder="🔍  Search projects..."
-          className="w-full px-4 py-2 bg-[#1e293b] text-gray-300 rounded-lg border border-[#334155] focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="🔍 Search projects..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="flex-none w-[30%] px-4 py-2 bg-[#1e293b] text-gray-300 rounded-lg border border-[#334155] focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
       </div>
 
       {projects.length > 0 ? (
         <div className="grid grid-cols-3 gap-4">
-          {projects.map((p) => (
+          {filteredProjects.map((p) => (
             <div
               key={p.id}
               className="bg-[#0f172a] border border-white/10 rounded-xl p-5 text-white shadow-md hover:shadow-xl transition-all duration-300"

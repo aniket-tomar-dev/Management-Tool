@@ -148,9 +148,9 @@ export default function ProjectTask() {
   });
 
   const getStatusIcon = (status: string) => {
-    if (status === "todo") return "⚪"; // empty circle
-    if (status === "progress") return "⏳"; // in progress
-    return "✔️"; // completed check
+    if (status === "todo") return "⚪";
+    if (status === "progress") return "⏳";
+    return "✔️";
   };
 
   //=============== return the webpage and show the project task page
