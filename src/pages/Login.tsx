@@ -38,28 +38,23 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen w-screen flex text-white">
+    <div className="h-screen w-screen flex flex-col md:flex-row text-white">
+      {/* Left side - visible only on md+ */}
       <div
-        className="w-1/2 h-full flex flex-col justify-center px-20
+        className="hidden md:flex md:w-1/2 h-full flex-col justify-center px-20
         bg-linear-to-br from-[#0f766e] via-[#0b3b5b] to-[#020617]"
       >
-        <div className="flex items-center gap-4 mb-6">
-          <div
-            className="w-12 h-12 rounded-xl bg-linear-to-br
-            from-blue-500 to-indigo-600 flex items-center justify-center
-            text-xl font-bold"
-          >
-            P
-          </div>
-          <h1 className="text-4xl font-bold">Welcome Back</h1>
+        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl font-bold mb-6">
+          P
         </div>
 
+        <h1 className="text-4xl font-bold mb-4">Welcome Back</h1>
         <p className="text-gray-300 text-lg max-w-md leading-relaxed">
           Continue your journey and manage your tasks effortlessly with
           ProManage.
         </p>
 
-        <ul className="flex gap-6 mt-10 text-sm text-gray-300">
+        <ul className="flex gap-6 mt-6 text-sm text-gray-300">
           <li className="flex items-center gap-2">
             <span className="w-2 h-2 bg-green-400 rounded-full"></span>
             Stay organized
@@ -75,50 +70,56 @@ export default function Login() {
         </ul>
       </div>
 
+      {/* Right side - login form */}
       <div
-        className="w-1/2 h-full flex items-center justify-center
-        bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a]"
+        className="flex-1 h-full flex flex-col items-center justify-center
+        bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a] px-6"
       >
-        <div
-          className="w-full max-w-md bg-[#020617]/80 backdrop-blur
-          border border-white/10 rounded-2xl p-8 shadow-2xl"
-        >
-          <h2 className="text-2xl font-semibold mb-1">
-            Sign in to your account
-          </h2>
-          <p className="text-sm text-gray-400 mb-6">
-            Welcome back! Please enter your details.
-          </p>
+        {/* Logo only on mobile */}
+        <div className="md:hidden w-16 h-16 rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl font-bold mb-8">
+          P
+        </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            <Input
-              label="Email"
-              placeholder="name@example.com"
-              {...register("email")}
-              error={errors.email?.message}
-            />
+        {/* Login form */}
+        <div className="w-full max-w-md">
+          <div className="bg-[#020617]/80 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl">
+            <h2 className="text-2xl font-semibold mb-1">
+              Sign in to your account
+            </h2>
+            <p className="text-sm text-gray-400 mb-6">
+              Welcome back! Please enter your details.
+            </p>
 
-            <Input
-              label="Password"
-              type="password"
-              {...register("password")}
-              error={errors.password?.message}
-            />
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <Input
+                label="Email"
+                placeholder="name@example.com"
+                {...register("email")}
+                error={errors.email?.message}
+              />
 
-            <Button
-              type="submit"
-              className="w-full bg-linear-to-r from-blue-500 to-indigo-600"
-            >
-              Login
-            </Button>
-          </form>
+              <Input
+                label="Password"
+                type="password"
+                {...register("password")}
+                error={errors.password?.message}
+              />
 
-          <p className="text-sm text-gray-400 mt-6 text-center">
-            Don’t have an account?
-            <Link to="/" className="text-blue-400 ml-1 hover:underline">
-              Register
-            </Link>
-          </p>
+              <Button
+                type="submit"
+                className="w-full bg-linear-to-r from-blue-500 to-indigo-600"
+              >
+                Login
+              </Button>
+            </form>
+
+            <p className="text-sm text-gray-400 mt-6 text-center">
+              Don’t have an account?
+              <Link to="/" className="text-blue-400 ml-1 hover:underline">
+                Register
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
