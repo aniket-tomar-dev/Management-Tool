@@ -161,7 +161,7 @@ export default function Dashboard() {
               Recent Projects
             </h2>
             <button
-              className="cursor-pointer hover:bg-cyan-400 w-24 sm:w-28 h-8 rounded-xl text-sm"
+              className="cursor-pointer hover:bg-cyan-400 w-24 sm:w-28 h-8 rounded-xl text-sm text-white"
               onClick={() => navigate("/dashboard/projects")}
             >
               view all

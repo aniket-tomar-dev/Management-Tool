@@ -176,7 +176,9 @@ export default function ProjectTask() {
             <h1 className="text-2xl sm:text-3xl font-bold text-white">
               {project?.name}
             </h1>
-            <p className="text-sm opacity-70">{tasks.length} tasks</p>
+            <p className="text-sm opacity-70 text-white">
+              {tasks.length} tasks
+            </p>
             <p className="text-gray-400 text-sm sm:text-base">
               Manage tasks of this project
             </p>
@@ -205,7 +207,7 @@ export default function ProjectTask() {
               <h2 className="font-semibold text-white text-xl sm:text-2xl">
                 {tasks.filter((t) => t.status === s).length}
               </h2>
-              <span className="text-sm sm:text-lg font-normal block mt-1">
+              <span className="text-sm text-white sm:text-lg font-normal block mt-1">
                 {s === "todo"
                   ? "To Do"
                   : s === "progress"
@@ -229,7 +231,9 @@ export default function ProjectTask() {
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value as Status)}
-          className="w-full sm:w-[20%] p-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full sm:w-[20%] p-2 border border-blue-700 rounded-md 
+            bg-[#1e293b] text-white focus:outline-none focus:ring-2 
+             focus:ring-blue-300"
         >
           <option value="all">All Status</option>
           <option value="todo">To Do</option>
@@ -240,7 +244,7 @@ export default function ProjectTask() {
         <select
           value={filterPriority}
           onChange={(e) => setFilterPriority(e.target.value as Priority)}
-          className="w-full sm:w-[20%] p-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full sm:w-[20%] p-2 border border-gray-300 rounded-md bg-[#1e293b]  text-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="all">All Priority</option>
           <option value="low">Low</option>
@@ -372,10 +376,37 @@ export default function ProjectTask() {
                   <p className="text-gray-400 text-sm mt-1">{t.description}</p>
 
                   <div className="flex gap-3 sm:gap-4 mt-3 text-sm">
-                    <p className="text-gray-300  bg-blue-900 px-3 py-1 rounded-2xl opacity-55">
+                    <p
+                      className={`
+      px-3 py-1 rounded-2xl flex items-center gap-1
+      ${
+        t.priority === "low"
+          ? "text-gray-300 bg-gray-700/40"
+          : t.priority === "medium"
+          ? "text-orange-300 bg-orange-900/40"
+          : "text-red-300 bg-red-900/40"
+      }
+    `}
+                    >
                       🏳️ {t.priority}
                     </p>
-                    <p className="text-gray-300">{t.issueDate}</p>
+
+                    <p
+                      className={`
+      px-3 py-1 rounded-2xl flex items-center gap-1
+      ${
+        t.status === "todo"
+          ? "text-blue-300 bg-blue-900/40"
+          : t.status === "progress"
+          ? "text-yellow-300 bg-yellow-900/40"
+          : "text-green-300 bg-green-900/40"
+      }
+    `}
+                    >
+                      {getStatusIcon(t.status)} {t.status}
+                    </p>
+
+                    <p className="text-gray-400">{t.issueDate}</p>
                   </div>
                 </div>
 
