@@ -39,7 +39,6 @@ export default function Login() {
 
   return (
     <div className="h-screen w-screen flex flex-col md:flex-row text-white">
-      {/* Left side - visible only on md+ */}
       <div
         className="hidden md:flex md:w-1/2 h-full flex-col justify-center px-20
         bg-linear-to-br from-[#0f766e] via-[#0b3b5b] to-[#020617]"
@@ -70,17 +69,14 @@ export default function Login() {
         </ul>
       </div>
 
-      {/* Right side - login form */}
       <div
         className="flex-1 h-full flex flex-col items-center justify-center
         bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a] px-6"
       >
-        {/* Logo only on mobile */}
         <div className="md:hidden w-16 h-16 rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl font-bold mb-8">
           P
         </div>
 
-        {/* Login form */}
         <div className="w-full max-w-md">
           <div className="bg-[#020617]/80 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl">
             <h2 className="text-2xl font-semibold mb-1">

@@ -7,12 +7,8 @@ import Settings from "./pages/dashboardpage/Settings";
 import DashBoardLayout from "./layouts/DashBoardLayout";
 import Projects from "./pages/dashboardpage/Projects";
 import ProjectTask from "./pages/dashboardpage/ProjectTask";
-import { useEffect } from "react";
 
 function App() {
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
   return (
     <BrowserRouter>
       <Routes>

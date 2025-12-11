@@ -1,25 +1,3 @@
-// import { Outlet } from "react-router-dom";
-
-// const MainLayout = () => {
-//   return (
-//     <div className="flex min-h-screen">
-//       <aside className="w-64 bg-[#0d1117] text-white p-4">
-//         <h1 className="text-xl font-bold mb-6">ProManage</h1>
-
-//         <nav className="flex flex-col space-y-4">
-//           <a href="/">Dashboard</a>
-//           <a href="/projects">Projects</a>
-//         </nav>
-//       </aside>
-
-//       <main className="flex-1 bg-gray-50 p-6">
-//         <Outlet />
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default MainLayout;
 import { Outlet, NavLink } from "react-router-dom";
 
 const MainLayout = () => {
@@ -30,7 +8,6 @@ const MainLayout = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
       <aside className="w-64 bg-[#020617] text-white p-6 flex flex-col justify-between">
         <div>
           <h1 className="text-2xl font-bold mb-8">ProManage</h1>
@@ -66,7 +43,6 @@ const MainLayout = () => {
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 bg-[#0f172a] p-6 overflow-auto">
         <Outlet />
       </main>
